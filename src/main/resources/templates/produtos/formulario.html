@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${modoEdicao} ? 'Editar produto' : 'Novo produto'">Novo produto</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main class="container container-estreito">
+    <header class="cabecalho">
+        <div>
+            <h1 th:text="${modoEdicao} ? 'Editar produto' : 'Novo produto'">Novo produto</h1>
+            <p class="subtitulo">Preencha os dados abaixo</p>
+        </div>
+    </header>
+
+    <section class="card">
+        <form class="formulario" th:action="@{${urlAcao}}" method="post" th:object="${produto}">
+            <input type="hidden" th:field="*{id}">
+
+            <div class="campo">
+                <label for="nome">Nome *</label>
+                <input type="text" id="nome" th:field="*{nome}" maxlength="100"
+                       placeholder="Ex.: Notebook Dell" autofocus>
+                <span class="erro" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Erro</span>
+            </div>
+
+            <div class="campo">
+                <label for="descricao">Descrição</label>
+                <textarea id="descricao" th:field="*{descricao}" rows="3" maxlength="255"
+                          placeholder="Detalhes opcionais do produto"></textarea>
+                <span class="erro" th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}">Erro</span>
+            </div>
+
+            <div class="linha">
+                <div class="campo">
+                    <label for="preco">Preço (R$) *</label>
+                    <input type="text" id="preco" th:field="*{preco}"
+                           inputmode="decimal" placeholder="0,00">
+                    <span class="erro" th:if="${#fields.hasErrors('preco')}" th:errors="*{preco}">Erro</span>
+                </div>
+
+                <div class="campo">
+                    <label for="quantidade">Quantidade *</label>
+                    <input type="number" id="quantidade" th:field="*{quantidade}" min="0" step="1">
+                    <span class="erro" th:if="${#fields.hasErrors('quantidade')}" th:errors="*{quantidade}">Erro</span>
+                </div>
+            </div>
+
+            <div class="acoes-form">
+                <button type="submit" class="botao">Salvar</button>
+                <a th:href="@{/produtos}" class="botao secundario">Cancelar</a>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>

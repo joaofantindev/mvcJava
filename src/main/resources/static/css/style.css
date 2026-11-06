@@ -1,0 +1,249 @@
+:root {
+    --fundo: #f4f6fb;
+    --card: #ffffff;
+    --texto: #1f2937;
+    --texto-suave: #6b7280;
+    --borda: #e5e7eb;
+    --primaria: #2563eb;
+    --primaria-escura: #1d4ed8;
+    --perigo: #dc2626;
+    --perigo-escura: #b91c1c;
+    --sucesso-fundo: #ecfdf5;
+    --sucesso-texto: #047857;
+    --erro: #dc2626;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--fundo);
+    color: var(--texto);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    line-height: 1.5;
+}
+
+.container {
+    width: min(1080px, 92%);
+    margin: 48px auto;
+}
+
+.container-estreito {
+    width: min(640px, 92%);
+}
+
+.cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.75rem;
+    letter-spacing: -0.02em;
+}
+
+.subtitulo {
+    margin: 4px 0 0;
+    color: var(--texto-suave);
+    font-size: 0.9rem;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--borda);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    overflow: hidden;
+}
+
+.alerta {
+    padding: 12px 16px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.alerta.sucesso {
+    background: var(--sucesso-fundo);
+    color: var(--sucesso-texto);
+    border: 1px solid #a7f3d0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--borda);
+}
+
+th {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--texto-suave);
+    background: #fafbfe;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background: #f8fafc;
+}
+
+.col-id {
+    width: 56px;
+    color: var(--texto-suave);
+}
+
+.col-preco {
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+.col-qtd {
+    width: 72px;
+    text-align: center;
+}
+
+.col-acoes {
+    width: 180px;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.vazio {
+    margin: 0;
+    padding: 48px 24px;
+    text-align: center;
+    color: var(--texto-suave);
+}
+
+.botao {
+    display: inline-block;
+    padding: 10px 18px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    background: var(--primaria);
+    color: #fff;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.botao:hover {
+    background: var(--primaria-escura);
+}
+
+.botao.secundario {
+    background: #fff;
+    color: var(--texto);
+    border-color: var(--borda);
+}
+
+.botao.secundario:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+.botao.perigo {
+    background: var(--perigo);
+}
+
+.botao.perigo:hover {
+    background: var(--perigo-escura);
+}
+
+.botao.pequeno {
+    padding: 6px 12px;
+    font-size: 0.82rem;
+}
+
+.inline {
+    display: inline;
+    margin: 0;
+}
+
+.formulario {
+    padding: 24px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 18px;
+}
+
+.campo label {
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.campo input,
+.campo textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font: inherit;
+    color: inherit;
+    background: #fff;
+    border: 1px solid var(--borda);
+    border-radius: 9px;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.campo input:focus,
+.campo textarea:focus {
+    border-color: var(--primaria);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.campo textarea {
+    resize: vertical;
+}
+
+.linha {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.erro {
+    color: var(--erro);
+    font-size: 0.82rem;
+}
+
+.acoes-form {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+@media (max-width: 640px) {
+    .cabecalho {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .linha {
+        grid-template-columns: 1fr;
+    }
+
+    .col-acoes {
+        width: auto;
+    }
+}

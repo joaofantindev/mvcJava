@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Produtos</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main class="container">
+    <header class="cabecalho">
+        <div>
+            <h1>Produtos</h1>
+            <p class="subtitulo">Cadastro de produtos em memória</p>
+        </div>
+        <a th:href="@{/produtos/novo}" class="botao">+ Novo produto</a>
+    </header>
+
+    <div th:if="${mensagem}" class="alerta sucesso" th:text="${mensagem}">Produto salvo com sucesso!</div>
+
+    <section class="card">
+        <p th:if="${#lists.isEmpty(produtos)}" class="vazio">
+            Nenhum produto cadastrado. Clique em <strong>Novo produto</strong> para começar.
+        </p>
+
+        <table th:unless="${#lists.isEmpty(produtos)}">
+            <thead>
+            <tr>
+                <th class="col-id">#</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th class="col-preco">Preço</th>
+                <th class="col-qtd">Qtd.</th>
+                <th class="col-acoes">Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="produto : ${produtos}">
+                <td class="col-id" th:text="${produto.id}">1</td>
+                <td th:text="${produto.nome}">Nome do produto</td>
+                <td th:text="${#strings.isEmpty(produto.descricao)} ? '—' : ${produto.descricao}">Descrição</td>
+                <td class="col-preco" th:text="|R$ ${#numbers.formatDecimal(produto.preco, 1, 2)}|">R$ 0,00</td>
+                <td class="col-qtd" th:text="${produto.quantidade}">0</td>
+                <td class="col-acoes">
+                    <a th:href="@{/produtos/{id}/editar(id=${produto.id})}"
+                       class="botao pequeno secundario">Editar</a>
+                    <form th:action="@{/produtos/{id}/excluir(id=${produto.id})}"
+                          method="post"
+                          class="inline"
+                          onsubmit="return confirm('Excluir o produto selecionado?');">
+                        <button type="submit" class="botao pequeno perigo">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>
